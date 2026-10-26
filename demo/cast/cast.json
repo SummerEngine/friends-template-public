@@ -1,0 +1,22 @@
+{
+  "format": "team-cast-v2",
+  "mode": "show",
+  "team": {
+    "name": "FRIENDS",
+    "tagline": "Race · survive · wear the crown"
+  },
+  "object": {
+    "kind": "landscape",
+    "picture": "",
+    "fit": "contain"
+  },
+  "players": [
+    {"name": "PLAYER 1", "color": "#ff5a36", "catchphrase": ""},
+    {"name": "PLAYER 2", "color": "#2c4bff", "catchphrase": ""}
+  ],
+  "words": {
+    "delivered": "DELIVERED",
+    "break": "CRACK!",
+    "fall": "WHOOPS!"
+  }
+}

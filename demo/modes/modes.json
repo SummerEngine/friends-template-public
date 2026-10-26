@@ -1,0 +1,12 @@
+{
+  "format": "friends-modes-v1",
+  "default": "carry",
+  "modes": {
+    "carry": {"title": "", "subtitle": "", "min": 2, "max": 10},
+    "who_said_it": {"title": "WHO SAID IT?", "subtitle": "Run to whoever says it", "min": 2, "max": 10},
+    "friend_swap": {"title": "FRIEND SWAP", "subtitle": "Play as a friend, then guess who is who", "min": 3, "max": 10},
+    "hot_potato": {"title": "HOT POTATO", "subtitle": "Pass it on before it pops", "min": 2, "max": 10},
+    "shove_off": {"title": "SHOVE-OFF", "subtitle": "Last one standing wins", "min": 2, "max": 10},
+    "show": {"title": "THE SHOW", "subtitle": "Race · survive · wear the crown", "min": 2, "max": 10, "camera": "third", "dash": true, "dash_flop": false}
+  }
+}

@@ -1,0 +1,35 @@
+{
+ "format": "level-1",
+ "number": 21,
+ "title": "SPIN BARS",
+ "blurb": "Jump the sweeping bars. The floor shrinks, the bars do not.",
+ "rule": "JUMP THE BARS  ·  LAST ONES STANDING SURVIVE",
+ "hint": "JUMP THE BARS AS THEY COME",
+ "modes": ["show"],
+ "pool": false,
+ "show": "survival",
+ "arena": true,
+ "start": {"p": [0, 0, 0], "yaw": 0},
+ "goal": {"p": [0.0, 1.0, -6.0], "s": [4.0, 2.0, 4.0], "yaw": 0.0},
+ "path": [[0.0, 0.0, 0.0], [0.0, 0.0, -3.0], [0.0, 0.0, -6.0]],
+ "void_y": -16.0,
+ "kill": [
+  {"p": [0.0, -12.75, 0.0], "s": [64.0, 5.5, 64.0], "yaw": 0.0}
+ ],
+ "blocks": [],
+ "hazards": [
+  {"k": "blink", "id": "bars_pedestal", "p": [0.0, 0.0, 0.0], "on": 10.0, "off": 600.0, "warn": 2.0, "hit": false, "parts": [{"k": "cyl", "p": [0.0, 0.5, 0.0], "d": 5.0, "h": 1.0}]},
+  {"k": "blink", "id": "bars_outer", "p": [0.0, 0.0, 0.0], "on": 24.0, "off": 600.0, "warn": 2.0, "hit": false, "parts": [{"k": "cyl", "p": [0.0, -1.0, 0.0], "d": 19.0, "h": 1.0}]},
+  {"k": "blink", "id": "bars_mid", "p": [0.0, 0.0, 0.0], "on": 38.0, "off": 600.0, "warn": 2.0, "hit": false, "parts": [{"k": "cyl", "p": [0.0, -0.75, 0.0], "d": 13.0, "h": 1.0}]},
+  {"k": "blink", "id": "bars_core", "p": [0.0, 0.0, 0.0], "on": 50.0, "off": 600.0, "warn": 2.0, "hit": false, "parts": [{"k": "cyl", "p": [0.0, -0.5, 0.0], "d": 7.0, "h": 1.0}]},
+  {"k": "spin", "id": "bar_slow", "p": [0.0, 0.25, 0.0], "axis": "y", "rate": 40, "phase": 0.0, "hit": true, "s": [20.0, 1.0, 0.5], "slot": "obstacle_1"},
+  {"k": "spin", "id": "bar_fast", "p": [0.0, 0.0, 0.0], "axis": "y", "rate": -65, "phase": 1.75, "hit": true, "s": [12.0, 1.0, 0.5], "slot": "obstacle_2"}
+ ],
+ "slots": [
+  {"id": "arch_start", "p": [0.0, 5.5, -14.5], "yaw": 0.0, "size": [8.0, 1.5]},
+  {"id": "banner_1", "p": [-12.5, 3.5, -4.0], "yaw": 90.0, "size": [8.0, 2.0]},
+  {"id": "banner_2", "p": [12.5, 3.5, -4.0], "yaw": -90.0, "size": [8.0, 2.0]},
+  {"id": "billboard_1", "p": [-9.0, 3.5, -16.5], "yaw": 0.0, "size": [5.0, 2.75]},
+  {"id": "billboard_2", "p": [9.0, 3.5, -16.5], "yaw": 0.0, "size": [5.0, 2.75]}
+ ]
+}

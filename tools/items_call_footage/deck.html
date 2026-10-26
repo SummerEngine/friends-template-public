@@ -1,0 +1,396 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><title>growth model</title>
+<style>
+  html, body { margin: 0; background: #fff; overflow: hidden; }
+  #app { position: absolute; left: 0; top: 0; width: 1280px; height: 720px; overflow: hidden; background: #fff; color: #202124;
+         font: 13px -apple-system, "Helvetica Neue", Helvetica, Arial, sans-serif; }
+  .abs { position: absolute; }
+  .menu span { margin-right: 18px; }
+  .btn { position: absolute; border-radius: 4px; text-align: center; color: #444; }
+  .cell { position: absolute; box-sizing: border-box; padding: 0 6px; white-space: nowrap; overflow: hidden; line-height: 26px; font-size: 13px; }
+  .num { text-align: right; }
+  #dropdown { position: absolute; width: 230px; background: #fff; border-radius: 6px; box-shadow: 0 4px 18px rgba(0,0,0,.28); padding: 6px 0; display: none; }
+  #dropdown div { height: 28px; line-height: 28px; padding: 0 16px; font-size: 13px; }
+  #slides { position: absolute; left: 0; top: 0; width: 1280px; height: 720px; background: #1b1c1f; opacity: 0; z-index: 10; }
+  .slide { position: absolute; left: 0; top: 0; width: 1280px; height: 720px; background: #fbfbf8; color: #17233c; }
+  .slide h1 { position: absolute; left: 96px; top: 72px; margin: 0; font-size: 58px; font-weight: 700; letter-spacing: -1px; }
+  .slide .sub { position: absolute; left: 98px; top: 150px; font-size: 22px; color: #6b7487; }
+  .bullet { position: absolute; left: 118px; font-size: 38px; }
+  .bullet b { display: inline-block; width: 230px; color: #0e7c86; }
+  .foot { position: absolute; left: 96px; bottom: 34px; font-size: 15px; color: #8b93a3; }
+  .pager { position: absolute; right: 96px; bottom: 34px; font-size: 15px; color: #8b93a3; }
+  #cursor { position: absolute; left: 0; top: 0; width: 22px; height: 30px; pointer-events: none; z-index: 50; }
+  .ripple { position: absolute; width: 10px; height: 10px; margin: -5px 0 0 -5px; border-radius: 50%; border: 2px solid rgba(26,115,232,.8); z-index: 49; }
+</style></head>
+<body>
+<div id="app">
+  <div id="sheet" class="abs" style="left:0;top:0;width:1280px;height:720px;background:#fff;z-index:0">
+    <!-- the document's title, menu and toolbar -->
+    <div class="abs" style="left:16px;top:11px;width:30px;height:38px;border-radius:5px;background:#e3e6ea"></div>
+    <div class="abs" style="left:22px;top:22px;width:18px;height:18px;border:2px solid #7a8089;box-sizing:border-box"></div>
+    <div class="abs" style="left:22px;top:30px;width:18px;height:2px;background:#7a8089"></div>
+    <div class="abs" style="left:30px;top:22px;width:2px;height:18px;background:#7a8089"></div>
+    <div class="abs" style="left:62px;top:9px;font-size:18px;color:#202124">Q3 growth model - final_v7 (copy)</div>
+    <div class="abs menu" style="left:62px;top:36px;font-size:13px;color:#3c4043"><span>File</span><span>Edit</span><span>View</span><span id="m_insert">Insert</span><span>Format</span><span>Data</span><span>Tools</span><span>Extensions</span><span>Help</span></div>
+    <div class="abs" style="left:1166px;top:14px;width:96px;height:34px;border-radius:17px;background:#1a73e8;color:#fff;text-align:center;line-height:34px;font-size:14px;font-weight:600">Present</div>
+    <div class="abs" style="left:0;top:62px;width:1280px;height:36px;background:#edf2fa;border-radius:18px 18px 0 0;margin:0 8px;width:1264px"></div>
+    <div class="abs" style="left:26px;top:72px;font-size:15px;color:#444">&#8630;&nbsp;&nbsp;&#8631;&nbsp;&nbsp;&#9113;&nbsp;&nbsp;&nbsp;&nbsp;100%&nbsp;&nbsp;&nbsp;&nbsp;$&nbsp;&nbsp;&nbsp;%&nbsp;&nbsp;&nbsp;.0&nbsp;&nbsp;&nbsp;.00&nbsp;&nbsp;&nbsp;123&nbsp;&nbsp;&nbsp;&nbsp;Default&nbsp;&nbsp;&nbsp;&nbsp;10&nbsp;&nbsp;&nbsp;&nbsp;<b>B</b>&nbsp;&nbsp;&nbsp;<i>I</i>&nbsp;&nbsp;&nbsp;<u>A</u></div>
+    <div class="abs" style="left:0;top:98px;width:1280px;height:30px;border-bottom:1px solid #dadce0;border-top:1px solid #dadce0"></div>
+    <div id="nameBox" class="abs" style="left:8px;top:103px;width:72px;height:20px;line-height:20px;font-size:13px;color:#202124;padding-left:6px">A1</div>
+    <div class="abs" style="left:92px;top:103px;font-size:14px;font-style:italic;color:#80868b;font-family:Georgia,serif">fx</div>
+    <div id="formula" class="abs" style="left:126px;top:103px;height:20px;line-height:20px;font-size:14px;color:#202124;white-space:pre"></div>
+    <div id="grid"></div>
+    <div id="rangeBox" class="abs" style="display:none;box-sizing:border-box;border:2px dashed #1a73e8;z-index:5"></div>
+    <div id="selBox" class="abs" style="display:none;box-sizing:border-box;border:2px solid #1a73e8;background:rgba(26,115,232,.08);z-index:6"></div>
+    <div id="handle" class="abs" style="display:none;width:7px;height:7px;background:#1a73e8;border:1px solid #fff;z-index:7"></div>
+    <div class="abs" style="left:0;top:678px;width:1280px;height:42px;background:#f8f9fa;border-top:1px solid #dadce0"></div>
+    <div class="abs" style="left:18px;top:691px;font-size:15px;color:#5f6368">+&nbsp;&nbsp;&nbsp;&#9776;</div>
+    <div class="abs" style="left:100px;top:684px;width:86px;height:30px;line-height:30px;text-align:center;background:#e1ecfb;color:#0b57d0;font-weight:600;border-radius:4px">Q3 model</div>
+    <div class="abs" style="left:200px;top:684px;line-height:30px;color:#5f6368">Assumptions&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Assumptions (old)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Sheet12&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Cohorts (do not delete)</div>
+    <div id="dropdown"></div>
+    <div id="chart" class="abs" style="display:none;left:330px;top:176px;width:640px;height:400px;background:#fff;border-radius:6px;box-shadow:0 3px 14px rgba(0,0,0,.3);z-index:8"></div>
+    <div id="side" class="abs" style="display:none;left:980px;top:128px;width:300px;height:550px;background:#fff;border-left:1px solid #dadce0;z-index:9"></div>
+  </div>
+  <div id="slides"><div class="slide" id="slideA"></div><div class="slide" id="slideB"></div>
+    <div class="abs" id="nextBtn" style="left:1140px;top:652px;width:96px;height:44px;border-radius:22px;background:rgba(255,255,255,.14);color:#fff;text-align:center;line-height:44px;font-size:22px;opacity:.0">&#10095;</div>
+  </div>
+  <svg id="cursor" viewBox="0 0 22 30"><path d="M2 2 L2 23 L7.5 18.2 L11.2 27 L14.6 25.5 L10.9 16.9 L18 16.9 Z" fill="#fff" stroke="#111" stroke-width="1.8" stroke-linejoin="round"/></svg>
+</div>
+<script>
+"use strict";
+const T = 22.0;                                    // length of the loop, s
+const COLS = ["A","B","C","D","E","F","G","H","I","J","K","L","M","N"];
+const MONTHS = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
+const X0 = 44, CW0 = 200, CW = 80, HDR_Y = 128, HDR_H = 24, RH = 26, ROWS = 20;
+const colX = c => c === 0 ? X0 : X0 + CW0 + (c - 1) * CW;
+const colW = c => c === 0 ? CW0 : CW;
+const rowY = r => HDR_Y + HDR_H + (r - 1) * RH;                       // r is 1-based
+const cellCentre = (r, c) => [colX(c) + colW(c) / 2, rowY(r) + RH / 2];
+
+// ---------------------------------------------------------------- the model: invented numbers, a plausible growth sheet
+const M = {signups: [], act: [], activated: [], conv: [], paying: [], arpu: [], mrr: [], churn: [], cost: [], gens: [], margin: [], cac: [], payback: [], ret: []};
+for (let i = 0; i < 12; i++) {
+  M.signups.push(Math.round(11200 * Math.pow(1.058, i)));
+  M.act.push(0.41 + 0.004 * i);
+  M.conv.push(0.038 + 0.0011 * i);
+  M.arpu.push(9 + 0.12 * i);
+  M.churn.push(0.044 - 0.0013 * i);
+  M.cost.push(0.021 * Math.pow(0.965, i));
+  M.gens.push(38 + 2 * i);
+  M.margin.push(0.71 + 0.007 * i);
+  M.cac.push(36 - 0.45 * i);
+  M.ret.push(0.33 + 0.0075 * i);
+  M.activated.push(M.signups[i] * M.act[i]);
+  M.paying.push(M.activated[i] * M.conv[i]);
+  M.mrr.push(i === 0 ? 8200 : M.mrr[i - 1] * (1 - M.churn[i]) + M.paying[i] * M.arpu[i]);
+  M.payback.push(M.cac[i] / (M.arpu[i] * M.margin[i]));
+}
+const fmt = {
+  int: v => Math.round(v).toLocaleString("en-US"),
+  pct: v => (v * 100).toFixed(1) + "%",
+  usd: v => "$" + v.toFixed(2),
+  usd0: v => "$" + Math.round(v).toLocaleString("en-US"),
+  one: v => v.toFixed(1),
+};
+// rows: [label, key, formatter, whether it is typed during the clip (filled by `fills`)]
+const ROWSPEC = [
+  null,
+  ["Metric", null, null],
+  ["New signups", "signups", fmt.int],
+  ["Activation %", "act", fmt.pct],
+  ["Activated users", "activated", fmt.int],
+  ["Paid conversion %", "conv", fmt.pct],
+  ["New paying users", "paying", fmt.int],
+  ["ARPU ($/mo)", "arpu", fmt.usd],
+  ["MRR ($)", "mrr", fmt.usd0],
+  ["Monthly churn %", "churn", fmt.pct],
+  ["Compute cost / gen ($)", "cost", v => "$" + v.toFixed(4)],
+  ["Generations / user", "gens", fmt.int],
+  ["Gross margin %", "margin", fmt.pct],
+  ["CAC ($)", "cac", fmt.usd],
+  ["Payback (months)", "payback", fmt.one],
+  ["Retention D30 %", "ret", fmt.pct],
+];
+
+// ---------------------------------------------------------------- the script of the clip: mouse waypoints and what each action does
+const way = [[0.0, 1212, 690]];        // [time, x, y] of the pointer
+const clicks = [];                     // times of mouse clicks
+const selects = [[0, 1, 1, 1, 1]];     // [time, row, col, row2, col2] selection
+const typings = [];                    // {t0, t1, enter, row, col, text}
+const reveals = [];                    // {row, col, time}
+const drags = [];                      // {t0, t1, row, c0, c1}
+let tNow = 0.0;
+const moveTo = (x, y, dur) => { way.push([tNow, ...way[way.length - 1].slice(1)]); tNow += dur; way.push([tNow, x, y]); };
+const wait = d => { tNow += d; way.push([tNow, ...way[way.length - 1].slice(1)]); };
+const click = () => clicks.push(tNow);
+
+// the rows that are typed or filled in during the clip: [row, first col shown typed, formula text, key]
+function episode(row, c0, formula, speed) {
+  const [x, y] = cellCentre(row, c0);
+  moveTo(x + 4, y, 0.7); click(); selects.push([tNow, row, c0, row, c0]);
+  wait(0.12);
+  const typed = formula.length / speed;
+  typings.push({t0: tNow, t1: tNow + typed, enter: tNow + typed + 0.3, row, col: c0, text: formula});
+  tNow += typed + 0.3;
+  reveals.push({row, col: c0, time: tNow});
+  selects.push([tNow, row + 1, c0, row + 1, c0]);
+  wait(0.15);
+  moveTo(x + 4, y, 0.3); click(); selects.push([tNow, row, c0, row, c0]);
+  const hx = colX(c0) + colW(c0) - 3, hy = rowY(row) + RH - 3;
+  moveTo(hx, hy, 0.25); wait(0.08);
+  const endX = colX(12) + colW(12) / 2;
+  const t0 = tNow;
+  moveTo(endX, hy, 0.6);
+  drags.push({t0, t1: tNow, row, c0, c1: 12});
+  selects.push([tNow, row, c0, row, 12]);
+  for (let c = c0 + 1; c <= 12; c++) reveals.push({row, col: c, time: tNow + 0.02 * (c - c0)});
+  wait(0.2);
+}
+wait(0.3);
+episode(4, 1, "=B2*B3", 7);
+episode(6, 1, "=B4*B5", 8);
+episode(8, 2, "=B8*(1-C9)+C6*C7", 14);
+
+// the Insert menu and the chart
+moveTo(204, 44, 0.7); click();
+const dropOpen = tNow;
+wait(0.3);
+moveTo(232, 52 + 6 + 28 + 14, 0.35);                                  // down to "Chart"
+wait(0.2); click();
+const dropClose = tNow;
+const chartAt = tNow + 0.1;
+wait(0.6);
+moveTo(780, 330, 0.6);
+wait(1.5);
+// the Present button in the corner starts the slides
+moveTo(1214, 31, 0.8); click();
+const presentAt = tNow + 0.1;
+wait(0.2);
+moveTo(1190, 560, 0.8);
+const slideBAt = presentAt + 2.7;
+const nextClick = slideBAt - 0.4;
+wait(Math.max(nextClick - 0.6 - tNow, 0.1));
+moveTo(1188, 674, 0.6); click();
+way.push([T - 0.5, 1212, 690]);
+way.push([T, 1212, 690]);
+console.log("timeline " + JSON.stringify({dropOpen, chartAt, presentAt, slideBAt, nextClick, end: tNow}));
+
+// ---------------------------------------------------------------- building the page
+const grid = document.getElementById("grid");
+const cells = [];
+for (let r = 1; r <= ROWS; r++) {
+  cells[r] = [];
+  for (let c = 0; c <= 13; c++) {
+    const el = document.createElement("div");
+    el.className = "cell" + (c > 0 ? " num" : "");
+    el.style.cssText = `left:${colX(c)}px;top:${rowY(r)}px;width:${colW(c)}px;height:${RH}px;border-right:1px solid #e2e3e3;border-bottom:1px solid #e2e3e3;`;
+    grid.appendChild(el);
+    cells[r][c] = el;
+  }
+}
+for (let c = 0; c <= 13; c++) {                                           // column headers
+  const el = document.createElement("div");
+  el.className = "cell";
+  el.style.cssText = `left:${colX(c)}px;top:${HDR_Y}px;width:${colW(c)}px;height:${HDR_H}px;line-height:${HDR_H}px;background:#f8f9fa;border-right:1px solid #dadce0;border-bottom:1px solid #dadce0;text-align:center;color:#5f6368;font-size:12px`;
+  el.textContent = COLS[c];
+  grid.appendChild(el);
+}
+const corner = document.createElement("div");
+corner.className = "cell";
+corner.style.cssText = `left:0;top:${HDR_Y}px;width:${X0}px;height:${HDR_H}px;background:#f8f9fa;border-right:1px solid #dadce0;border-bottom:1px solid #dadce0`;
+grid.appendChild(corner);
+for (let r = 1; r <= ROWS; r++) {                                         // row headers
+  const el = document.createElement("div");
+  el.className = "cell";
+  el.style.cssText = `left:0;top:${rowY(r)}px;width:${X0}px;height:${RH}px;background:#f8f9fa;border-right:1px solid #dadce0;border-bottom:1px solid #dadce0;text-align:center;color:#5f6368;font-size:12px;padding:0`;
+  el.textContent = r;
+  grid.appendChild(el);
+}
+const revealTime = {};
+for (const e of reveals) revealTime[e.row + "," + e.col] = e.time;
+const TYPED_ROWS = new Set([4, 6, 8]);
+
+function cellText(r, c, t) {
+  if (r === 1) return c === 0 ? "Metric" : (c <= 12 ? MONTHS[c - 1] : "");
+  const spec = ROWSPEC[r];
+  if (!spec) return "";
+  if (c === 0) return spec[0];
+  if (c > 12) return "";
+  if (TYPED_ROWS.has(r) && !(r === 8 && c === 1)) {
+    const when = revealTime[r + "," + c];
+    if (when === undefined || t < when) return "";
+  }
+  return spec[2](M[spec[1]][c - 1]);
+}
+
+// ---------------------------------------------------------------- the clock
+const ease = x => x <= 0 ? 0 : x >= 1 ? 1 : x * x * (3 - 2 * x);
+const clamp = (x, a, b) => Math.max(a, Math.min(b, x));
+function pointer(t) {
+  let i = 0;
+  while (i < way.length - 1 && way[i + 1][0] <= t) i++;
+  if (i >= way.length - 1) return [way[way.length - 1][1], way[way.length - 1][2]];
+  const a = way[i], b = way[i + 1];
+  const u = ease((t - a[0]) / Math.max(b[0] - a[0], 1e-6));
+  const bow = Math.sin(u * Math.PI) * 0.06 * Math.hypot(b[1] - a[1], b[2] - a[2]); // a human's hand curves a little
+  return [a[1] + (b[1] - a[1]) * u + bow * 0.5, a[2] + (b[2] - a[2]) * u - bow];
+}
+const lastBefore = (list, t) => { let found = list[0]; for (const e of list) if (e[0] <= t) found = e; return found; };
+
+const dropdown = document.getElementById("dropdown");
+dropdown.innerHTML = ["Cells", "Chart", "Pivot table", "Image", "Drawing", "Function", "Link", "Checkbox", "Comment", "Note"].map(s => `<div>${s}</div>`).join("");
+const dropdownItems = dropdown.children;
+const chartEl = document.getElementById("chart");
+const sideEl = document.getElementById("side");
+
+function chartHTML(progress) {
+  const W = 640, H = 400, L = 62, R = 24, TOP = 70, BOT = 52;
+  const series = M.mrr.map(v => v / 1000);
+  const cost = M.cost.map((c, i) => c * M.gens[i] * M.paying[i] * 0.9 / 1000 * 6);
+  const top = Math.ceil(Math.max(...series) / 10) * 10;
+  const px = i => L + (W - L - R) * i / 11, py = v => TOP + (H - TOP - BOT) * (1 - v / top);
+  const path = arr => arr.map((v, i) => (i ? "L" : "M") + px(i).toFixed(1) + " " + py(v).toFixed(1)).join(" ");
+  let grid = "";
+  for (let k = 0; k <= 4; k++) { const v = top * k / 4; grid += `<line x1="${L}" x2="${W - R}" y1="${py(v)}" y2="${py(v)}" stroke="#e3e5e8"/><text x="${L - 10}" y="${py(v) + 4}" text-anchor="end" font-size="12" fill="#5f6368">${v.toFixed(0)}</text>`; }
+  let labels = "";
+  for (let i = 0; i < 12; i += 1) labels += `<text x="${px(i)}" y="${H - BOT + 22}" text-anchor="middle" font-size="12" fill="#5f6368">${MONTHS[i]}</text>`;
+  const len = 1400;
+  return `<svg width="${W}" height="${H}" viewBox="0 0 ${W} ${H}" xmlns="http://www.w3.org/2000/svg" font-family="-apple-system, Helvetica Neue, Arial, sans-serif">
+    <text x="24" y="38" font-size="20" fill="#202124">MRR vs. compute cost ($k)</text>
+    <text x="24" y="58" font-size="13" fill="#5f6368">Jan - Dec, all plans</text>
+    ${grid}${labels}
+    <path d="${path(cost)}" fill="none" stroke="#d93025" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="${len}" stroke-dashoffset="${len * (1 - progress)}"/>
+    <path d="${path(series)}" fill="none" stroke="#1a73e8" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="${len}" stroke-dashoffset="${len * (1 - progress)}"/>
+    <rect x="${W - 232}" y="22" width="12" height="12" fill="#1a73e8"/><text x="${W - 214}" y="33" font-size="13" fill="#3c4043">MRR</text>
+    <rect x="${W - 160}" y="22" width="12" height="12" fill="#d93025"/><text x="${W - 142}" y="33" font-size="13" fill="#3c4043">Compute cost</text>
+  </svg>`;
+}
+sideEl.innerHTML = `<div style="padding:18px 20px;font-size:16px;font-weight:600">Chart editor</div>
+  <div style="padding:0 20px;color:#5f6368;line-height:34px;font-size:13px">
+  <div>Setup &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Customize</div><hr style="border:0;border-top:1px solid #e3e5e8">
+  <div style="color:#202124">Chart type</div><div style="border:1px solid #c7c9cc;border-radius:4px;height:32px;line-height:32px;padding:0 10px;color:#202124">Line chart</div>
+  <div style="color:#202124;margin-top:6px">Data range</div><div style="border:1px solid #c7c9cc;border-radius:4px;height:32px;line-height:32px;padding:0 10px;color:#202124">B8:M8, B10:M10</div>
+  <div style="margin-top:6px">&#9744; Switch rows / columns</div><div>&#9745; Use row 1 as headers</div><div>&#9744; Aggregate</div></div>`;
+
+const slideA = document.getElementById("slideA");
+const slideB = document.getElementById("slideB");
+const dec = 11;
+const kpi = [
+  ["MRR", "$" + (M.mrr[dec] / 1000).toFixed(1) + "k  (+" + ((M.mrr[dec] / M.mrr[dec - 1] - 1) * 100).toFixed(1) + "% MoM)"],
+  ["CAC", "$" + M.cac[dec].toFixed(0) + "  blended"],
+  ["Payback", M.payback[dec].toFixed(1) + " months"],
+  ["Retention", (M.ret[dec] * 100).toFixed(0) + "% at day 30"],
+];
+function barChart() {
+  let s = `<svg class="abs" style="left:790px;top:250px" width="400" height="330" viewBox="0 0 400 330">`;
+  const max = Math.max(...M.mrr);
+  M.mrr.forEach((v, i) => { const h = 280 * v / max; s += `<rect x="${i * 33 + 4}" y="${300 - h}" width="24" height="${h}" rx="3" fill="${i === 11 ? "#0e7c86" : "#bcd6d9"}"/>`; });
+  s += `<line x1="0" x2="400" y1="301" y2="301" stroke="#c9ced8"/><text x="2" y="322" font-size="14" fill="#8b93a3">Jan</text><text x="398" y="322" font-size="14" text-anchor="end" fill="#8b93a3">Dec</text></svg>`;
+  return s;
+}
+slideA.innerHTML = `<h1>Unit economics</h1><div class="sub">Q3 review &middot; draft 4</div>` +
+  kpi.map((k, i) => `<div class="bullet" id="b${i}" style="top:${240 + i * 76}px"><b>${k[0]}</b>${k[1]}</div>`).join("") + barChart() +
+  `<div class="foot">Growth review &middot; numbers are illustrative</div><div class="pager">7 / 42</div>`;
+slideB.innerHTML = `<h1>What we learned</h1><div class="sub">from eleven experiments</div>
+  <div class="bullet" style="top:250px;font-size:34px"><b style="width:60px">1.</b>Onboarding is a funnel</div>
+  <div class="bullet" style="top:320px;font-size:34px"><b style="width:60px">2.</b>Compute is a cost center</div>
+  <div class="bullet" style="top:390px;font-size:34px"><b style="width:60px">3.</b>See appendix B</div>
+  <div class="foot">Growth review &middot; numbers are illustrative</div><div class="pager">8 / 42</div>`;
+
+const cursorEl = document.getElementById("cursor");
+const ripples = clicks.map(() => { const r = document.createElement("div"); r.className = "ripple"; r.style.display = "none"; document.getElementById("app").appendChild(r); return r; });
+const sheetEl = document.getElementById("sheet");
+const slidesEl = document.getElementById("slides");
+const nextBtn = document.getElementById("nextBtn");
+const selBox = document.getElementById("selBox"), rangeBox = document.getElementById("rangeBox"), handle = document.getElementById("handle");
+const nameBox = document.getElementById("nameBox"), formula = document.getElementById("formula");
+
+function rangeRect(r, c, r2, c2) {
+  const ra = Math.min(r, r2), rb = Math.max(r, r2), ca = Math.min(c, c2), cb = Math.max(c, c2);
+  return [colX(ca), rowY(ra), colX(cb) + colW(cb) - colX(ca), rowY(rb) + RH - rowY(ra)];
+}
+
+// seek(t): the page as it is at time t (the clip is a pure function of time; the recorder steps t and takes a screenshot)
+function seek(time) {
+  const t = ((time % T) + T) % T;
+  const wrapped = t > T - 0.8;                        // the last moments fade the slides out onto the first frame's sheet
+  const ts = wrapped ? 0.0 : t;
+  // the sheet
+  const [, sr, sc, sr2, sc2] = lastBefore(selects, ts);
+  let editing = null;
+  for (const e of typings) if (ts >= e.t0 - 0.0 && ts < e.enter) editing = e;
+  for (let r = 1; r <= ROWS; r++) for (let c = 0; c <= 13; c++) {
+    const el = cells[r][c];
+    let text = cellText(r, c, ts);
+    const when = revealTime[r + "," + c];
+    el.style.opacity = when !== undefined && ts >= when && ts < when + 0.25 && c > 0 ? 0.25 + 0.75 * clamp((ts - when) / 0.25, 0, 1) : 1;
+    el.style.fontWeight = r === 1 || c === 0 && r === 8 ? "700" : "400";
+    el.style.background = r === 1 ? "#f1f3f4" : "#fff";
+    if (editing && editing.row === r && editing.col === c) { text = editing.text.slice(0, Math.floor((ts - editing.t0) * (editing.text.length / Math.max(editing.t1 - editing.t0, 1e-6)) + 0.001)); el.className = "cell"; el.style.overflow = "visible"; el.style.zIndex = 4; el.style.background = "#fff"; }
+    else { el.className = "cell" + (c > 0 ? " num" : ""); el.style.overflow = "hidden"; el.style.zIndex = 0; }
+    if (el.textContent !== text) el.textContent = text;
+  }
+  const [bx, by, bw, bh] = rangeRect(sr, sc, sr2, sc2);
+  selBox.style.display = "block";
+  selBox.style.left = bx + "px"; selBox.style.top = by + "px"; selBox.style.width = bw + "px"; selBox.style.height = bh + "px";
+  selBox.style.background = (sr === sr2 && sc === sc2) ? "transparent" : "rgba(26,115,232,.09)";
+  handle.style.display = "block";
+  handle.style.left = (bx + bw - 5) + "px"; handle.style.top = (by + bh - 5) + "px";
+  nameBox.textContent = COLS[sc] + sr + (sr === sr2 && sc === sc2 ? "" : ":" + COLS[sc2] + sr2);
+  let activeDrag = null;
+  for (const d of drags) if (ts >= d.t0 && ts < d.t1) activeDrag = d;
+  if (activeDrag) {
+    const p = ease((ts - activeDrag.t0) / (activeDrag.t1 - activeDrag.t0));
+    const colNow = activeDrag.c0 + Math.round((activeDrag.c1 - activeDrag.c0) * p);
+    const [rx, ry, rw, rh] = rangeRect(activeDrag.row, activeDrag.c0, activeDrag.row, colNow);
+    rangeBox.style.display = "block";
+    rangeBox.style.left = rx + "px"; rangeBox.style.top = ry + "px"; rangeBox.style.width = rw + "px"; rangeBox.style.height = rh + "px";
+  } else rangeBox.style.display = "none";
+  formula.textContent = editing ? editing.text.slice(0, Math.floor((ts - editing.t0) * (editing.text.length / Math.max(editing.t1 - editing.t0, 1e-6)) + 0.001)) + (Math.floor(ts * 2) % 2 === 0 ? "|" : "") : (() => {
+    const spec = ROWSPEC[sr];
+    if (!spec || sc > 12) return "";
+    if (sr === 4 && cellText(sr, sc, ts) !== "") return "=" + COLS[sc] + "2*" + COLS[sc] + "3";
+    if (sr === 6 && cellText(sr, sc, ts) !== "") return "=" + COLS[sc] + "4*" + COLS[sc] + "5";
+    if (sr === 8 && sc >= 2 && cellText(sr, sc, ts) !== "") return "=" + COLS[sc - 1] + "8*(1-" + COLS[sc] + "9)+" + COLS[sc] + "6*" + COLS[sc] + "7";
+    return cellText(sr, sc, ts);
+  })();
+  // the Insert menu
+  const open = ts >= dropOpen && ts < dropClose;
+  dropdown.style.display = open ? "block" : "none";
+  dropdown.style.left = "178px"; dropdown.style.top = "54px";
+  if (open) for (let i = 0; i < dropdownItems.length; i++) dropdownItems[i].style.background = i === 1 && ts > dropOpen + 0.45 ? "#eef1f5" : "#fff";
+  document.getElementById("m_insert").style.background = open ? "#e8eaed" : "transparent";
+  // the chart
+  const cp = ease((ts - chartAt) / 0.5);
+  chartEl.style.display = cp > 0 && ts < presentAt + 0.7 ? "block" : "none";
+  sideEl.style.display = chartEl.style.display;
+  chartEl.style.transform = `scale(${0.9 + 0.1 * cp})`; chartEl.style.opacity = cp;
+  sideEl.style.transform = `translateX(${(1 - cp) * 60}px)`; sideEl.style.opacity = cp;
+  if (cp > 0) chartEl.innerHTML = chartHTML(ease((ts - chartAt - 0.4) / 2.2));
+  // the slides
+  const pa = wrapped ? 1 - ease((t - (T - 0.8)) / 0.8) : ease((t - presentAt) / 0.9);
+  slidesEl.style.opacity = pa;
+  slidesEl.style.display = pa > 0 ? "block" : "none";
+  slideA.style.transform = `scale(${0.96 + 0.04 * pa})`;
+  const sb = wrapped ? 1 : ease((t - slideBAt) / 1.6);                     // the next slide comes in slowly from the right
+  slideA.style.left = (-sb * 1280 * 0.35) + "px"; slideA.style.opacity = 1 - sb * 0.6;
+  slideB.style.left = ((1 - sb) * 1280) + "px";
+  for (let i = 0; i < 4; i++) { const b = document.getElementById("b" + i); const u = ease((t - presentAt - 0.7 - i * 0.35) / 0.5); b.style.opacity = wrapped ? 1 : u; b.style.transform = `translateX(${(1 - u) * 30}px)`; }
+  nextBtn.style.opacity = wrapped ? 0 : clamp((t - (slideBAt - 1.2)) / 0.5, 0, 1) * (1 - clamp((t - slideBAt) / 0.4, 0, 1)) * 0.9;
+  // the pointer and its clicks
+  const [px, py] = pointer(wrapped ? Math.min(t, T) : t);
+  cursorEl.style.transform = `translate(${px - 2}px, ${py - 2}px)`;
+  clicks.forEach((ct, i) => {
+    const u = (t - ct) / 0.45;
+    const r = ripples[i];
+    if (u < 0 || u > 1 || wrapped) { r.style.display = "none"; return; }
+    const [cx, cy] = pointer(ct);
+    r.style.display = "block"; r.style.left = (cx - 0) + "px"; r.style.top = (cy - 0) + "px";
+    r.style.transform = `scale(${1 + u * 3.2})`; r.style.opacity = 1 - u;
+  });
+}
+window.seek = seek;
+window.CLIP_LENGTH = T;
+seek(0);
+</script>
+</body></html>

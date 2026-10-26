@@ -1,0 +1,27 @@
+{
+  "format": "level-1", "number": 4, "title": "TEST SCORCHERS", "blurb": "Every laser, fire jet and spike crusher in a row.",
+  "modes": ["carry", "balloon"],
+  "start": {"p": [0, 0, 0], "yaw": 0},
+  "goal": {"p": [0, 2, -62], "s": [8, 4, 4], "yaw": 0},
+  "path": [[0, 0, 0], [0, 0, -5], [0, 0, -10], [0, 0, -15], [0, 0, -20], [0, 0, -25], [0, 0, -30], [0, 0, -35], [0, 0, -40], [0, 0, -45],
+    [0, 0, -50], [0, 0, -55], [0, 0, -60], [0, 0, -62]],
+  "kill": [],
+  "checkpoints": [{"p": [0, 2, -29], "s": [14, 4, 2], "yaw": 0}],
+  "blocks": [
+    {"k": "box", "p": [0, -0.5, -31], "s": [16, 1, 66]},
+    {"k": "box", "p": [0, 5.25, -46], "s": [8, 0.5, 2]}
+  ],
+  "hazards": [
+    {"k": "laser", "id": "fence", "p": [-6, 1, -8], "to": [12, 0, 0]},
+    {"k": "laser", "id": "timed", "p": [-6, 2.5, -14], "to": [12, 0, 0], "on": 2, "off": 2, "warn": 0.75},
+    {"k": "laser", "id": "sweep_up", "p": [-6, 0.5, -20], "to": [12, 0, 0], "move": [0, 3, 0], "period": 4, "pause": 0.5},
+    {"k": "laser", "id": "turning", "p": [0, 2, -25], "to": [5, 0, 0], "rate": 45},
+    {"k": "fire", "id": "jet_box", "p": [-3, 1.5, -34], "s": [2, 3, 2], "on": 2, "off": 2, "warn": 1},
+    {"k": "fire", "id": "jet_round", "g": "cyl", "p": [3, 1.5, -34], "d": 2, "h": 3, "on": 2, "off": 2, "warn": 1, "phase": 2},
+    {"k": "slide", "id": "crusher", "p": [-4, 1.25, -40], "to": [8, 0, 0], "period": 4, "s": [1, 2.5, 1], "look": "spikes"},
+    {"k": "swing", "id": "spiked_hammer", "p": [0, 5, -46], "axis": "z", "a0": -60, "a1": 60, "period": 3, "look": "spikes", "parts": [
+      {"k": "box", "p": [0, -2, 0], "s": [0.5, 4, 0.5]}, {"k": "box", "p": [0, -4, 0], "s": [2, 1, 1]}]},
+    {"k": "spin", "id": "spiked_bar", "p": [0, 1, -52], "s": [6, 0.5, 0.5], "rate": 40, "look": "spikes"},
+    {"k": "lift", "id": "spiked_press", "p": [4, 3, -57], "s": [2, 1, 2], "rise": -2, "period": 4, "pause": 0.5, "look": "spikes"}
+  ]
+}

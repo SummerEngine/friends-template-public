@@ -1,0 +1,23 @@
+{
+  "format": "tandem-1",
+  "experiment": "EXPERIMENT (switchable): TANDEM. Two players who run towards or alongside each other within `close` m for `hold` s grab hands and fuse into a tandem for `duration` s: `speed` times as fast, steering is the AVERAGE of both players' inputs, whoever they run into is flung (`shove` times the shove), at the end they spin apart with a fling. Cooldown per pair. Alone, a buddy runs up to the player (`solo_buddy`). Set \"on\" to false (or a round to false) and the game plays without it. Rules: modes/show/shared/tandem/tandem.gd, docs/party-show.md 'Tandem (experiment)'.",
+  "on": true,
+  "rounds": {"race": true, "lobby": true},
+  "solo_buddy": true,
+  "name": "TANDEM",
+  "banner": "TANDEM!",
+  "line": "{a} AND {b} ARE HOLDING HANDS",
+  "tuning": {
+    "close": 1.2,
+    "hold": 1.5,
+    "duration": 6.0,
+    "speed": 1.6,
+    "shove": 2.2,
+    "cooldown": 10.0,
+    "min_speed": 1.5,
+    "break_dist": 3.4,
+    "fling": 5.5,
+    "lift": 3.0,
+    "spin": 0.7
+  }
+}

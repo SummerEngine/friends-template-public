@@ -1,0 +1,81 @@
+{
+  "schema": "summer.build.v2",
+  "gameId": "game_your_game_id",
+  "executionMode": "hosted",
+  "targetPlatforms": [
+    "android",
+    "ios",
+    "macos",
+    "windows"
+  ],
+  "project": {
+    "directory": "."
+  },
+  "server": {
+    "exportPreset": "FRIENDS Authority"
+  },
+  "runtime": {
+    "protocolVersion": "1.3.0",
+    "interfaces": {
+      "multiplayer": 6,
+      "session": 3,
+      "lobby": 3,
+      "presence": 3,
+      "config": 3,
+      "party": 1,
+      "matchSearch": 1
+    },
+    "scenes": [
+      "res://client/main.tscn"
+    ],
+    "worldDefinitions": [
+      "world.json"
+    ],
+    "queues": [
+      {
+        "name": "lobby_10",
+        "minPlayers": 2,
+        "maxPlayers": 10,
+        "worldDefinition": "friends",
+        "policy": "fifo",
+        "transport": "enet",
+        "searchTtl": {
+          "min": "30s",
+          "default": "5m",
+          "max": "10m"
+        },
+        "acceptance": {
+          "mode": "all",
+          "ttl": "15s"
+        },
+        "placement": "new_world",
+        "reconnect": {
+          "grace": "30s"
+        },
+        "backfill": {
+          "enabled": false
+        },
+        "allocation": {
+          "maxAttempts": 3,
+          "deadline": "90s"
+        },
+        "regions": [
+          "us-east-1"
+        ]
+      }
+    ],
+    "tickRate": 60,
+    "config": {
+      "keys": {}
+    },
+    "presence": {
+      "tokens": {}
+    },
+    "lobby": {
+      "fields": {}
+    },
+    "server": {
+      "tier": "large"
+    }
+  }
+}

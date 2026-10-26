@@ -1,0 +1,28 @@
+{
+  "schema": "summer.world-definition.v1",
+  "definition_id": "friends",
+  "lifetime": "match_scoped",
+  "topology": "dedicated",
+  "client_entry_point": "res://client/main.tscn",
+  "components": [{
+    "component_id": "match",
+    "profile": "headless_engine",
+    "runtime_descriptor": "runtime-manifest.json",
+    "entry_point": "authority/main.tscn",
+    "owns": ["match"]
+  }],
+  "source_graph": "source-domains.json",
+  "network_compositions": ["res://network/composition.tres"],
+  "services": {"required": [], "optional": []},
+  "settlement": {"mode": "required", "version": 1},
+  "persistence": {
+    "mode": "none", "recovery_point_seconds": 0,
+    "snapshot_schemas": [], "migration_ids": []
+  },
+  "lifecycle": {
+    "reconnect_seconds": 30, "drain_seconds": 5,
+    "transfer": "disabled", "completion_owner": "world"
+  },
+  "placement": {"region_policy": "nearest", "server_tier": "large"},
+  "limits_profile": "default"
+}

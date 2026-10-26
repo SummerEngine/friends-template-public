@@ -1,0 +1,6 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://authority/main.gd" id="1_nuivt"]
+
+[node name="FriendsAuthority" type="Node" unique_id=823243499]
+script = ExtResource("1_nuivt")

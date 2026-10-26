@@ -1,0 +1,38 @@
+{
+  "format": "team-cast-v2",
+  "team": {"name": "ACME", "title": "ACME: DON'T DROP THE PARCEL", "tagline": "Four couriers · one city · don't drop it",
+           "credit_link": "https://acme.example"},
+  "mode": "show",
+  "show": {"words": {"qualified": "ON TIME!", "eliminated": "RETURNED", "champion": "TOP COURIER", "go": "DELIVER!"}},
+  "brand": {"logo": "logo.png", "colors": ["#ff6a13", "#1d1d1f", "#3a5bd9"]},
+  "world": {"theme": "office"},
+  "object": {"kind": "landscape", "picture": "print.png", "fit": "cover"},
+  "balloon": {"shape": "blimp", "picture": "balloon.png"},
+  "obstacles": [
+    {"label": "BROKEN LIFT", "picture": "obstacle_1.png"},
+    {"label": "WRONG ADDRESS", "picture": "obstacle_2.png", "color": "#99bdff"},
+    {"label": "FIFTH FLOOR", "picture": "obstacle_3.png"},
+    {"label": "RUSH HOUR", "picture": "obstacle_4.png", "color": "#3a5bd9"},
+    {"label": "LAST PICKUP", "picture": "obstacle_5.png"}
+  ],
+  "posters": [
+    {"picture": "poster_1.png", "caption": "FULL SPEED"},
+    {"picture": "poster_2.png", "caption": "MORE COFFEE"}
+  ],
+  "eggs": ["Someone always says it's a quick one", "Someone still owes the team a pizza"],
+  "players": [
+    {"name": "Maja", "color": "#22aa55", "catchphrase": "On my way!", "voice": "voice/member_1.ogg", "title": "THE FIXER"},
+    {"name": "Theo", "color": "#2c4bff", "catchphrase": "Mind the corner!", "voice": "voice/member_2.ogg", "title": "THE NAVIGATOR"},
+    {"name": "Ines", "color": "#ffd23f", "catchphrase": "Signed and sealed!", "voice": "voice/member_3.ogg", "title": "THE SPRINTER"},
+    {"name": "Kofi", "color": "#9b5de5", "catchphrase": "Ship it!", "voice": "voice/member_4.ogg", "title": "THE CALM ONE"}
+  ],
+  "words": {"delivered": "ON TIME!", "break": "DAMAGED!", "fall": "WHOOPS!", "pop": "POP!"},
+  "music": "careful-step",
+  "team_wall": [
+    {"name": "Maja", "picture": "team/member_1.png"},
+    {"name": "Theo", "picture": "team/member_2.png"},
+    {"name": "Ines", "picture": "team/member_3.png"},
+    {"name": "Kofi", "picture": "team/member_4.png"},
+    {"name": "Ana"}
+  ]
+}

@@ -1,0 +1,23 @@
+{
+ "format": "ghost-pigeon-1",
+ "experiment": "EXPERIMENT (switchable): GHOST PIGEON. A player who is out of a tile round, or through a race, does not just spectate: they become a pigeon that flies over the arena and may COO at (a loud coo and a small screen shake within 5 m) or DROP on (a white splat that half covers the view for 1.5 s) the living players. It never pushes or kills anybody. Delete this file or set \"on\" to false (or put show.pigeon.off in the cast) and the show plays without it. Rules: modes/show/shared/pigeon/pigeon_rules.gd, docs/pigeon.md.",
+ "on": true,
+ "rounds": {"race": true, "survival": true, "final": true},
+ "texts": {
+  "banner": "YOU ARE A PIGEON",
+  "coo": "COO!",
+  "splat": "SPLAT!",
+  "line": "{user} IS A PIGEON NOW",
+  "drop_line": "{user} DROPPED ONE ON {victim}"
+ },
+ "tuning": {
+  "speed": {"min": 4.0, "max": 14.0, "default": 8.0},
+  "climb": {"min": 2.0, "max": 8.0, "default": 5.0},
+  "coo_cooldown": {"min": 1.0, "max": 10.0, "default": 3.0},
+  "coo_range": {"min": 2.0, "max": 10.0, "default": 5.0},
+  "drop_cooldown": {"min": 3.0, "max": 20.0, "default": 6.0},
+  "splat_time": {"min": 0.5, "max": 3.0, "default": 1.5},
+  "victim_rest": {"min": 0.0, "max": 10.0, "default": 2.0},
+  "wander_after": {"min": 2.0, "max": 30.0, "default": 5.0}
+ }
+}

@@ -1,0 +1,22 @@
+{
+  "format": "level-1", "number": 1, "title": "BELT LANES", "blurb": "One lane per conveyor case: tools/belt_check.gd.",
+  "note": "Test data of tools/belt_check.gd: a courier stands, walks, steps off and jumps from conveyor belts (m belt) of 3 m/s; no player route.",
+  "start": {"p": [0, 0, 0], "yaw": 0},
+  "goal": {"p": [36, 2, -6], "s": [4, 4, 4], "yaw": 0},
+  "path": [[0, 0, 0], [2, 0, -5], [6, 0, -6], [12, 0, -6], [18, 0, -6], [24, 0, -6], [30, 0, -6], [36, 0, -6]],
+  "kill": [{"p": [20, -12, -20], "s": [120, 1, 80], "yaw": 0}],
+  "blocks": [
+    {"k": "box", "p": [0, -0.5, 0], "s": [8, 1, 8]},
+    {"k": "box", "p": [20, -0.5, -6], "s": [40, 1, 4], "m": "belt", "belt": [3, 0]},
+    {"k": "box", "p": [20, -0.5, -12], "s": [40, 1, 4], "m": "belt", "belt": [3, 0]},
+    {"k": "box", "p": [20, -0.5, -18], "s": [40, 1, 4], "m": "belt", "belt": [3, 0]},
+    {"k": "box", "p": [5, -0.5, -24], "s": [10, 1, 4], "m": "belt", "belt": [3, 0]},
+    {"k": "box", "p": [30, -2.5, -24], "s": [40, 1, 4]},
+    {"k": "box", "p": [20, -0.5, -30], "s": [40, 1, 4], "m": "belt", "belt": [3, 0]},
+    {"k": "box", "p": [20, -0.5, -34], "s": [40, 1, 4], "m": "belt", "belt": [-3, 0]},
+    {"k": "box", "p": [20, -0.5, -42], "s": [40, 1, 4], "m": "belt", "belt": [3, 0]},
+    {"k": "box", "p": [20, -0.75, -42], "s": [40, 1, 4], "m": "ice"},
+    {"k": "box", "p": [50, -0.5, -20], "s": [4, 1, 40], "m": "belt", "belt": [0, 3]}
+  ],
+  "hazards": []
+}

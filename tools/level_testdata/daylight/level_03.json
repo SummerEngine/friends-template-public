@@ -1,0 +1,13 @@
+{
+  "format": "level-1", "number": 3, "title": "TEST CORRIDOR", "blurb": "A long thin straight race over open air (world daylight).",
+  "modes": ["show"], "pool": false, "show": "race", "world": "daylight",
+  "start": {"p": [0, 0, 0], "yaw": 0},
+  "goal": {"p": [0, 2, -196], "s": [6, 4, 4], "yaw": 0},
+  "path": [[0, 0, 0], [0, 0, -40], [0, 0, -80], [0, 0, -120], [0, 0, -160], [0, 0, -196]],
+  "void_y": -8.0,
+  "kill": [],
+  "blocks": [
+    {"k": "box", "p": [0, -0.5, -100], "s": [6, 1, 200]}
+  ],
+  "hazards": []
+}

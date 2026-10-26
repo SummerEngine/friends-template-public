@@ -1,0 +1,25 @@
+name: checks
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+jobs:
+  template:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Cast check
+        run: python3 tools/cast_check.py
+      - name: Clean scan
+        run: python3 tools/clean_scan.py --tree .
+      - name: Level lint
+        run: python3 tools/level_lint.py demo/levels && python3 tools/level_lint.py tools/level_testdata
+      - name: Hosted domain graph (every res:// path resolves)
+        run: python3 tools/build_domain_graph.py --project demo > /dev/null
+      - name: Unit tests
+        run: python3 -m unittest discover -s tools -p 'test_*.py'

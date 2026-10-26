@@ -1,0 +1,11 @@
+{
+  "format": "hot-eggplant-1",
+  "experiment": "EXPERIMENT (switchable): HOT EGGPLANT. In the race rounds a giant cartoon eggplant is strapped to one runner's back now and then (the first about 40 s into the race, then about every 90 s, when the show's event gate lets it: one interrupting event at a time, 15 s apart): 25 % slower, lower jumps, it cannot be dropped, only passed on by a bump or a GRAB (2 s of immunity for whoever passed it), and it pops after 20 s or at the finish line. Delete this file or set \"on\" to false and the races run without it. Rules: items/eggplant_rules.gd, look: items_ui/eggplant_view.gd, numbers and texts: items.json \"eggplant\" (the cast's show.items entry with id eggplant renames and retunes them). docs/items.md 'Hot eggplant (experiment)'.",
+  "on": true,
+  "levels": {
+    "29": {"on": true},
+    "30": {"on": true},
+    "31": {"on": true},
+    "32": {"on": true}
+  }
+}

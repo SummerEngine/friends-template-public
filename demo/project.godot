@@ -1,0 +1,54 @@
+; Engine configuration file.
+; It's best edited using the editor UI and not directly,
+; since the parameters that go here are not all obvious.
+;
+; Format:
+;   [section] ; section goes between []
+;   param=value ; assign values to parameters
+
+config_version=5
+
+[animation]
+
+compatibility/default_parent_skeleton_in_mesh_instance_3d=true
+
+[application]
+
+config/name="FRIENDS"
+run/main_scene="res://main.tscn"
+config/features=PackedStringArray("4.7", "GL Compatibility")
+run/main_scene.summer_client="res://client/main.tscn"
+run/main_scene.summer_authority="res://authority/main.tscn"
+run/max_fps.android=60
+
+[display]
+
+window/size/viewport_width=1280
+window/size/viewport_height=720
+window/size/window_width_override=800
+window/size/window_height_override=450
+window/stretch/mode="canvas_items"
+window/stretch/aspect="expand"
+window/handheld/orientation=4
+window/vsync/vsync_mode=0
+
+[physics]
+
+3d/physics_engine="Jolt Physics"
+
+[rendering]
+
+renderer/rendering_method="gl_compatibility"
+renderer/rendering_method.mobile="gl_compatibility"
+renderer/rendering_method.web="mobile"
+textures/vram_compression/import_s3tc_bptc=true
+anti_aliasing/quality/msaa_3d=2
+renderer/rendering_method.summer_authority="gl_compatibility"
+renderer/rendering_method.macos="mobile"
+
+[summer]
+
+local_play/network/round_trip_msec=120
+local_play/network/jitter_msec=12
+local_play/network/loss_percent=1
+version="0.7.3"

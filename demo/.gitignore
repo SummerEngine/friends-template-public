@@ -1,0 +1,12 @@
+.godot/
+.summer/
+*.import
+# the facility look's textures keep their import settings (mipmaps, VRAM compression, normal maps)
+!assets/surfaces/**/*.import
+# the sky's cloud picture keeps its import settings (VRAM compression, no mipmaps)
+!assets/sky/sky_clouds.png.import
+*.bak
+.DS_Store
+
+# Summer Engine local-only state (SummerGit, caches, locks)
+.summer/local/

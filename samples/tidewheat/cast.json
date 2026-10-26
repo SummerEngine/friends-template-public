@@ -1,0 +1,34 @@
+{
+  "format": "team-cast-v2",
+  "team": {"name": "TIDEWHEAT", "title": "TIDEWHEAT: RISE TO THE TOP", "tagline": "Six bakers · one oven · first to the crown",
+           "credit_link": "https://tidewheat.example"},
+  "mode": "show",
+  "brand": {"logo": "logo.png", "colors": ["#0e9aa7", "#4a2c82", "#8fe3b8"]},
+  "world": {"theme": "outdoor"},
+  "obstacles": [
+    {"label": "RUNAWAY DOUGH", "picture": "obstacle_1.png", "color": "#e8c88a"},
+    {"label": "FLOUR CLOUD", "picture": "obstacle_2.png", "color": "#8fe3b8"},
+    {"label": "HOT TRAYS", "picture": "obstacle_3.png", "color": "#4a2c82"},
+    {"label": "SUGAR SPILL", "picture": "obstacle_4.png", "color": "#0e9aa7"},
+    {"label": "WOBBLY CAKE", "picture": "obstacle_5.png", "color": "#7a4fc0"}
+  ],
+  "show": {
+    "words": {"qualified": "FRESH BAKED!", "eliminated": "STALE", "champion": "TOP BAKER", "go": "BAKE IT UP!"},
+    "rounds": {
+      "r15": {"title": "LAST LOAF STANDING", "label": ["ORDER #1", "RYE", "SOURDOUGH", "BAGUETTE", "ORDER #2", "BAGEL"]},
+      "r17": {"title": "BREAK THROUGH", "label": "FRESH BREAD"},
+      "r23": {"title": "RUNAWAY DOUGH", "rule": "DODGE THE DOUGH  ·  REACH THE GOAL", "label": "DOUGH"}
+    }
+  },
+  "eggs": ["Someone always checks the oven twice", "Someone still owes the team a pie"],
+  "players": [
+    {"name": "Bram", "color": "#d7263d", "catchphrase": "Fresh out of the oven!", "title": "THE KNEADER"},
+    {"name": "Odalys", "color": "#ff7ac7", "catchphrase": "Rise and shine!", "title": "THE GLAZER"},
+    {"name": "Rune", "color": "#2f6bff", "catchphrase": "Knead for speed!", "title": "THE TIMER"},
+    {"name": "Yuki", "color": "#f2b705", "catchphrase": "Crumbs, I'm quick!", "title": "THE SPRINTER"},
+    {"name": "Cass", "color": "#2bb673", "catchphrase": "Let it rise!", "title": "THE CALM ONE"},
+    {"name": "Tomasz", "color": "#8a4fff", "catchphrase": "Proof is in the baking!", "title": "THE TASTER"}
+  ],
+  "words": {"delivered": "FRESH BAKED!", "break": "CRUSHED!", "fall": "WHOOPS!", "pop": "POP!"},
+  "music": "funk"
+}

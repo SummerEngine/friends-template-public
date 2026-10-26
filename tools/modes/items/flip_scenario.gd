@@ -1,0 +1,41 @@
+extends RefCounted
+## FLIP end to end: slot 2 holds it and presses ITEM; the authority puts the effect on slots 0 and 1 (not on the user), both replica clients get it in the state, their owners'
+## steering is flipped (item_mods), the victim sees the banner, and everything is gone when the seconds are up.
+func run(h) -> void:
+	for slot in 3: h.hold(slot)
+	await h.tick(20)
+	await h.wait_until(func() -> bool: return float(h.state().get("t", 0.0)) > 1.4, 60 * 4) # the show's GO banner has cleared (item banners wait for it: one big banner at a time)
+	var items = h.rules().items
+	h.check(items.boxes.size() > 0, "level 31 lists item boxes (%d)" % items.boxes.size())
+	h.check(int(h.state().items.boxes) == (1 << items.boxes.size()) - 1, "all the boxes are there at the start (mask %d)" % int(h.state().items.boxes))
+	h.check(h.give(2, "flip"), "slot 2 holds FLIP")
+	await h.tick(4)
+	h.check(int(h.state().items.held[2]) == items.Catalog.index("flip"), "the state says slot 2 holds it")
+	h.shoot("before")
+	await h.tick(4)
+	h.press_item(2)
+	await h.tick(2)
+	h.shoot("hit")
+	await h.tick(15)
+	h.shoot("roll")
+	var mid_roll: float = float(h.replicas[0].follow.fx.get("roll", 0.0))
+	await h.tick(6)
+	h.check(absf(mid_roll) > 1.0, "the camera is well into its barrel roll at 0.3 s (roll %.2f rad)" % mid_roll)
+	var st: Dictionary = h.state()
+	var victims: Array = []
+	for row: Array in st.items.fx:
+		if int(row[2]) == items.Catalog.index("flip"): victims.append(int(row[1]))
+	victims.sort()
+	h.check(victims == [0, 1], "FLIP is on slots 0 and 1, not on the user (%s)" % str(victims))
+	h.check(int(st.items.held[2]) == -1, "the item is used up")
+	h.check(bool(h.replicas[0].item_mods.get(0, {}).get("invert", false)) and bool(h.replicas[1].item_mods.get(1, {}).get("invert", false)), "both clients flip their owner's steering")
+	h.check(not h.replicas[0].item_mods.has(2), "the user's steering is not flipped")
+	h.check(str(h.views[0]._items._banner.get("words", "")) == "FLIPPED!", "the victim's screen shows the banner (%s)" % str(h.views[0]._items._banner.get("words", "")))
+	var flipped := Vector2(0.6, -0.8)
+	h.check(h.replicas[0].item_move(0, flipped) == -flipped, "the shell flips the move vector")
+	await h.tick(30)
+	h.shoot("pill")
+	h.check(is_zero_approx(float(h.replicas[0].follow.fx.get("roll", 0.0))), "the barrel roll is over, the camera is upright")
+	await h.wait_until(func() -> bool: return h.state().items.fx.is_empty(), 60 * 9)
+	await h.tick(6)
+	h.check(h.state().items.fx.is_empty() and h.replicas[0].item_mods.is_empty() and h.replicas[1].item_mods.is_empty(), "after the seconds are up nobody is flipped and the clients are free")

@@ -1,0 +1,6 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://client/main.gd" id="1_8jq5g"]
+
+[node name="FriendsClient" type="Node" unique_id=441232959]
+script = ExtResource("1_8jq5g")

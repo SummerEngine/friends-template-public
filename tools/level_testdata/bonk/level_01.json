@@ -1,0 +1,30 @@
+{
+  "format": "level-1", "number": 1, "title": "BONK LANES", "blurb": "One lane per moving hazard kind: tools/bonk_check.gd.",
+  "note": "A courier stands (or walks) in each lane; the check measures how far the hazard throws it.",
+  "start": {"p": [0, 0, 0], "yaw": 0},
+  "goal": {"p": [0, 2, -26], "s": [6, 4, 4], "yaw": 0},
+  "path": [[0, 0, 0], [0, 0, -6], [0, 0, -11], [0, 0, -16], [0, 0, -21], [0, 0, -26]],
+  "kill": [{"p": [0, -6, -10], "s": [160, 1, 40], "yaw": 0}],
+  "blocks": [
+    {"k": "box", "p": [0, -0.5, -10], "s": [160, 1, 40]},
+    {"k": "box", "p": [-60, 6.5, -6], "s": [6, 0.75, 3]},
+    {"k": "box", "p": [115, -0.5, -10], "s": [70, 1, 40]}
+  ],
+  "hazards": [
+    {"k": "swing", "id": "hammer", "p": [-60, 6.25, -6], "axis": "z", "a0": -40, "a1": 40, "period": 4, "pause": 0.5, "parts": [
+      {"k": "box", "p": [0, -2.5, 0], "s": [0.5, 5, 0.5]}, {"k": "box", "p": [0, -5.25, 0], "s": [2.5, 1.5, 2]}]},
+    {"k": "spin", "id": "bar", "p": [-45, 0.5, -6], "axis": "y", "rate": 45, "parts": [
+      {"k": "box", "p": [0, 0, 0], "s": [6, 1, 1]}, {"k": "box", "p": [0, 0, 0], "s": [1, 1, 6]}]},
+    {"k": "slide", "id": "sweeper", "p": [-34, 1, -6], "to": [8, 0, 0], "period": 6, "pause": 0.5, "s": [1, 2, 8], "hit": true},
+    {"k": "lift", "id": "stamp", "p": [-15, 3.5, -6], "rise": -2.5, "period": 6, "pause": 0.5, "s": [4, 1, 4], "hit": true},
+    {"k": "ball", "id": "ball", "p": [5, 1, -6], "path": [[5, 1, -6], [30, 1, -6]], "speed": 4, "rad": 1, "period": 10},
+    {"k": "cannon", "id": "cannon", "p": [50, 1.5, -6], "v": [-12, 3, 0], "rad": 0.5, "period": 4, "life": 3},
+    {"k": "push", "id": "pad", "g": "box", "p": [60, 0.5, -6], "s": [2, 1, 2], "v": [0, 8, -10]},
+    {"k": "bumper", "id": "bumper", "p": [70, 1, -6], "rad": 1.25},
+    {"k": "ball", "id": "lane_ball", "p": [90, 1.75, -20], "path": [[90, 1.75, -20], [90, 1.75, 0]], "speed": 7, "rad": 1.75, "period": 6},
+    {"k": "ball", "id": "lane_walk", "p": [97, 1.75, -20], "path": [[97, 1.75, -20], [97, 1.75, 0]], "speed": 7, "rad": 1.75, "period": 6},
+    {"k": "ball", "id": "hop_ball", "p": [104, 0.5, -20], "path": [[104, 0.5, -20], [104, 0.5, 0]], "speed": 9, "rad": 0.5, "period": 4},
+    {"k": "ball", "id": "cross_ball", "p": [110, 1.75, -6], "path": [[110, 1.75, -6], [140, 1.75, -6]], "speed": 6, "rad": 1.75, "period": 6.5},
+    {"k": "cannon", "id": "drop_cannon", "p": [130, 3.5, 8], "v": [-4, 6, 0], "rad": 0.75, "period": 4, "life": 1}
+  ]
+}

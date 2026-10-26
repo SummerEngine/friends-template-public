@@ -1,0 +1,88 @@
+[gd_resource type="SummerNetworkComposition" format=3]
+
+[sub_resource type="SummerNetworkField" id="SummerNetworkField_m0nr3"]
+field_name = &"b"
+type = 20
+
+[sub_resource type="SummerNetworkSchema" id="SummerNetworkSchema_aigrw"]
+schema_id = &"gw.command.v1"
+state_fields = Array[SummerNetworkField]([SubResource("SummerNetworkField_m0nr3")])
+
+[sub_resource type="SummerNetworkField" id="SummerNetworkField_lovvw"]
+field_name = &"b"
+type = 20
+
+[sub_resource type="SummerNetworkSchema" id="SummerNetworkSchema_l62yh"]
+schema_id = &"gw.command.result.v1"
+state_fields = Array[SummerNetworkField]([SubResource("SummerNetworkField_lovvw")])
+
+[sub_resource type="SummerNetworkOccurrenceStream" id="SummerNetworkOccurrenceStream_4v317"]
+command_tick_dispatch = true
+result_schema = SubResource("SummerNetworkSchema_l62yh")
+stream_id = &"gw.command"
+command_scope = 2
+payload_schema = SubResource("SummerNetworkSchema_aigrw")
+command_timeout_msec = 8000
+
+[sub_resource type="SummerTargetSessionAudience" id="SummerTargetSessionAudience_s3php"]
+
+[sub_resource type="SummerNetworkField" id="SummerNetworkField_efues"]
+field_name = &"b"
+type = 20
+
+[sub_resource type="SummerNetworkSchema" id="SummerNetworkSchema_ifnl1"]
+schema_id = &"gw.input.v1"
+state_fields = Array[SummerNetworkField]([SubResource("SummerNetworkField_efues")])
+
+[sub_resource type="SummerNetworkStateStream" id="SummerNetworkStateStream_lof7e"]
+writer_policy = 1
+skip_writer_echo = true
+stream_id = &"gw.input"
+state_schema = SubResource("SummerNetworkSchema_ifnl1")
+audience_policy = SubResource("SummerTargetSessionAudience_s3php")
+max_keys = 10
+max_state_bytes = 1024
+max_total_bytes = 10240
+max_audience_count = 1
+
+[sub_resource type="SummerWorldAudience" id="SummerWorldAudience_6cyab"]
+max_expansion = 10
+
+[sub_resource type="SummerNetworkField" id="SummerNetworkField_emqma"]
+field_name = &"b"
+type = 20
+
+[sub_resource type="SummerNetworkSchema" id="SummerNetworkSchema_3inir"]
+schema_id = &"gw.world.v1"
+state_fields = Array[SummerNetworkField]([SubResource("SummerNetworkField_emqma")])
+
+[sub_resource type="SummerNetworkStateStream" id="SummerNetworkStateStream_gpsbl"]
+stream_id = &"gw.world"
+state_schema = SubResource("SummerNetworkSchema_3inir")
+audience_policy = SubResource("SummerWorldAudience_6cyab")
+max_keys = 1
+max_state_bytes = 32768
+max_total_bytes = 32768
+max_audience_count = 10
+
+[sub_resource type="SummerNetworkField" id="SummerNetworkField_6yhyj"]
+field_name = &"b"
+type = 20
+
+[sub_resource type="SummerNetworkSchema" id="SummerNetworkSchema_hsiy2"]
+schema_id = &"gw.worker.v1"
+state_fields = Array[SummerNetworkField]([SubResource("SummerNetworkField_6yhyj")])
+
+[sub_resource type="SummerNetworkStateStream" id="SummerNetworkStateStream_8xoou"]
+stream_id = &"gw.worker"
+state_schema = SubResource("SummerNetworkSchema_hsiy2")
+audience_policy = SubResource("SummerWorldAudience_6cyab")
+max_keys = 10
+max_state_bytes = 512
+max_total_bytes = 5120
+max_audience_count = 10
+
+[resource]
+network_version = "1.3.0"
+state_streams = Array[SummerNetworkStateStream]([SubResource("SummerNetworkStateStream_lof7e"), SubResource("SummerNetworkStateStream_gpsbl"), SubResource("SummerNetworkStateStream_8xoou")])
+occurrence_streams = Array[SummerNetworkOccurrenceStream]([SubResource("SummerNetworkOccurrenceStream_4v317")])

@@ -1,0 +1,49 @@
+{
+ "format": "items-1",
+ "note": "Defaults of the show's items and events (docs/items.md). Read by modes/show/items/catalog.gd and by tools/cast_check.py: a cast's show.items entry overrides name, banner, line, voice, sfx, media and tuning of one id. The texts here are the template's own and generic; a team's jokes live in its cast.",
+ "held": ["smash", "call", "flip", "glitch", "dance"],
+ "events": ["boost", "soar"],
+ "box": {"respawn": 8.0, "radius": 1.15, "roll": 1.0, "rim": 0.55},
+ "event": {"first": [40.0, 55.0], "every": [50.0, 70.0], "back_bias": 2.0},
+ "items": {
+  "smash": {
+   "name": "GIANT HAND", "banner": "SMASHED!", "line": "{user} DROPPED THE HAND ON {victim}",
+   "weights": [0.0, 2.0, 6.0],
+   "tuning": {"warn": {"min": 0.8, "max": 3.0, "default": 1.4}, "pin": {"min": 1.0, "max": 5.0, "default": 2.5}, "squash": {"min": 0.08, "max": 0.3, "default": 0.11}}
+  },
+  "call": {
+   "name": "INCOMING CALL", "banner": "INCOMING CALL", "line": "{user} CALLED {victim}",
+   "weights": [0.0, 3.0, 4.0],
+   "tuning": {"window": {"min": 4.0, "max": 10.0, "default": 6.0}, "least": {"min": 3.0, "max": 6.0, "default": 3.5}, "tap": {"min": 0.2, "max": 1.0, "default": 0.5}, "speed": {"min": 12.0, "max": 40.0, "default": 20.0}, "cover": {"min": 0.6, "max": 0.9, "default": 0.72}}
+  },
+  "flip": {
+   "name": "FLIP", "banner": "FLIPPED!", "line": "{user} FLIPPED EVERYONE'S CONTROLS",
+   "weights": [4.0, 3.0, 2.0],
+   "tuning": {"duration": {"min": 3.0, "max": 12.0, "default": 7.0}}
+  },
+  "glitch": {
+   "name": "GLITCH", "banner": "GLITCH!", "line": "{user} GLITCHED EVERYONE AHEAD",
+   "weights": [0.0, 3.0, 3.0],
+   "tuning": {"duration": {"min": 3.0, "max": 10.0, "default": 5.5}, "period": {"min": 0.25, "max": 1.0, "default": 0.5}, "sway": {"min": 0.0, "max": 2.0, "default": 1.0}}
+  },
+  "dance": {
+   "name": "VERTICAL VIDEO", "banner": "FILMING!", "line": "{user} FILMED {victim}",
+   "weights": [4.0, 3.0, 2.0],
+   "tuning": {"duration": {"min": 2.0, "max": 6.0, "default": 3.0}, "speed": {"min": 10.0, "max": 30.0, "default": 18.0}, "assist": {"min": 0.0, "max": 60.0, "default": 32.0}}
+  },
+  "boost": {
+   "name": "BOOST", "banner": "SPEED UP!", "line": "{victim} GOT A BOOST",
+   "tuning": {"duration": {"min": 3.0, "max": 8.0, "default": 5.0}, "speed": {"min": 1.1, "max": 1.8, "default": 1.45}, "shove": {"min": 1.0, "max": 4.0, "default": 2.2}}
+  },
+  "soar": {
+   "name": "SUPER JUMP", "banner": "SUPER JUMP!", "line": "{victim} IS SOARING",
+   "tuning": {"duration": {"min": 3.0, "max": 8.0, "default": 5.5}, "jump": {"min": 1.2, "max": 2.6, "default": 2.0}, "air_jumps": {"min": 0, "max": 2, "default": 1}}
+  },
+  "eggplant": {
+   "name": "EGGPLANT", "banner": "EGGPLANT!", "line": "{victim} HAS THE EGGPLANT", "pass": "{user} PASSED IT TO {victim}", "pop": "DELIVERED!",
+   "tuning": {"duration": {"min": 8.0, "max": 40.0, "default": 20.0}, "speed": {"min": 0.4, "max": 1.0, "default": 0.75}, "jump": {"min": 0.4, "max": 1.0, "default": 0.8},
+    "first": {"min": 4.0, "max": 120.0, "default": 40.0}, "every": {"min": 20.0, "max": 240.0, "default": 90.0}, "immune": {"min": 0.5, "max": 6.0, "default": 2.0},
+    "reach": {"min": 0.7, "max": 2.0, "default": 1.05}, "bias": {"min": 1.0, "max": 6.0, "default": 3.0}}
+  }
+ }
+}

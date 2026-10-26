@@ -1,0 +1,39 @@
+{
+  "format": "manager-1",
+  "experiment": "EXPERIMENT (switchable): THE MANAGER. At the start of every race and tile round one random player is named THE MANAGER (a banner, a clipboard over their head). Every 60-75 s (the show's event gate, 15 s between interrupting events) a compact strip at the bottom edge asks the manager (auto-pick after 3 s) to issue a RULE (3 random choices: keys 1 2 3, E or a pad's item button picks a random one, three buttons on a phone); the rule applies to everybody else for 10-15 s. Alone, the rule hits you after a short delay. Delete this file or set \"on\" to false and every round plays without it. Rules: modes/show/shared/manager/manager_rules.gd, docs/party-show.md 'The manager (experiment)'.",
+  "on": true,
+  "rounds": {
+    "race": {"on": true},
+    "final": {"on": true},
+    "survival": {"on": true}
+  },
+  "levels": {},
+  "timing": {
+    "first": [22.0, 30.0],
+    "every": [60.0, 75.0],
+    "prompt": 3.0,
+    "bot": 1.2,
+    "lead": 0.9,
+    "solo_lead": 1.6,
+    "intro": 1.2
+  },
+  "texts": {
+    "title": "THE MANAGER",
+    "line": "{manager} MAKES THE RULES",
+    "you": "YOU MAKE THE RULES",
+    "prompt": "PICK A RULE",
+    "waiting": "{manager} IS PICKING A RULE",
+    "made": "{manager}'S RULE"
+  },
+  "order": ["flip", "moon", "nojump", "giant", "tiny", "ice", "walk", "upside"],
+  "rules": {
+    "flip": {"name": "INVERTED", "banner": "INVERTED!", "duration": [10.0, 14.0], "mods": {"invert": true}},
+    "moon": {"name": "MOON JUMP", "banner": "MOON JUMP!", "duration": [11.0, 15.0], "mods": {"gravity": 0.28}},
+    "nojump": {"name": "NO JUMPING", "banner": "NO JUMPING!", "duration": [10.0, 12.0], "mods": {"no_jump": true}},
+    "giant": {"name": "EVERYONE GIANT", "banner": "GIANTS!", "duration": [11.0, 15.0], "scale": [2.3, 2.3, 2.3]},
+    "tiny": {"name": "EVERYONE TINY", "banner": "TINY!", "duration": [11.0, 15.0], "scale": [0.42, 0.42, 0.42]},
+    "ice": {"name": "SLIPPERY FLOOR", "banner": "SLIPPERY!", "duration": [10.0, 14.0], "mods": {"ice": true}},
+    "walk": {"name": "WALK ONLY", "banner": "WALK ONLY!", "duration": [10.0, 14.0], "mods": {"speed": 0.5, "no_dash": true}},
+    "upside": {"name": "UPSIDE DOWN", "banner": "UPSIDE DOWN!", "duration": [10.0, 12.0], "camera": {"roll": 3.14159265}}
+  }
+}

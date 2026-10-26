@@ -1,0 +1,11 @@
+{
+  "format": "edge-bumpers-1",
+  "experiment": "EXPERIMENT (switchable): rounded bumper cushions along the open edges of every jump-target platform of the race levels (share 1.0 = all of them). Delete this file or set \"on\" to false and every level is exactly as its level_NN.json says. Rules: levels/edge_bumpers.gd, docs/level-format.md 'Edge bumpers (experiment)'.",
+  "on": true,
+  "levels": {
+    "29": {"on": true, "share": 1.0, "seed": 29},
+    "30": {"on": true, "share": 1.0, "seed": 30},
+    "31": {"on": true, "share": 1.0, "seed": 31},
+    "32": {"on": true, "share": 1.0, "seed": 32}
+  }
+}

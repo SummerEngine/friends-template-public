@@ -1,0 +1,5 @@
+{
+  "profile": "headless_engine",
+  "entry_point": "authority/main.tscn",
+  "export_preset": "FRIENDS Authority"
+}
