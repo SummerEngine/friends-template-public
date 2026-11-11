@@ -1,0 +1,37 @@
+{
+  "id": "friends-template",
+  "version": "1.0.0",
+  "name": "Friends Party Game",
+  "engineMinVersion": "0.7.3",
+  "entryScene": "res://main.tscn",
+  "dimension": "3D",
+  "mechanics": [
+    "online-multiplayer",
+    "local-multiplayer",
+    "lobby",
+    "party-show-rounds",
+    "minigames",
+    "physics-props",
+    "grab-and-throw",
+    "player-shove",
+    "co-op-carry",
+    "hazards",
+    "data-driven-levels",
+    "hud",
+    "touch-controls",
+    "music-and-sfx"
+  ],
+  "genres": ["party", "co-op", "multiplayer", "obstacle-course"],
+  "agentBrief": "A finished online party game for 2 to 10 players (Summer Engine, Godot 4, 3D, GDScript), made to be built on. ENTRY SCENE: res://main.tscn. Press PLAY, everybody stands on the lobby circle, Enter (pad Y) starts the game the cast picked. It plays offline with two players on one keyboard (WASD + Q/E turn + F grab; IJKL + U/O turn + N grab; demo/game/game_input.gd lists the rest) and online through Summer multiplayer. PICK THE GAME: one setting, \"mode\" in res://cast/cast.json: \"show\" (default: three rounds, a race, a falling-floor survival and a crown climb, levels 14-16), \"carry\" (2 players carry a painting or, with \"object\": {\"kind\": \"glass\"}, a glass pane; 3+ players keep a balloon up), or the minigames \"who_said_it\", \"friend_swap\", \"hot_potato\", \"shove_off\". Set the mode closest to what the person asked for, then make it theirs. EASY CHANGES: res://cast/cast.json and the fixed-name files next to it (team name, tagline, player names and colours, words, logo, pictures, banners, hero prop); a missing field falls back to the template. LEVELS are data: res://levels/level_NN.json (blocks, hazards, kill and goal zones, waypoints); prefer a new level file over code; \"pool\": false keeps a level out of random runs. MODES: res://modes/<id>/rules.gd (rules, authority side) and view.gd (what players see), list in res://modes/modes.json. LOOK: res://character/ and res://courier/ (players, outfits, heads), res://style/ (world look), res://client/ (menus, HUD, online screens, touch controls). NETWORK RULE: res://game/game_run.gd runs the same simulation in three roles, local (one keyboard), authority (server, res://authority/main.tscn) and replica (each online player, res://client/main.tscn). Put gameplay rules on the authority side (res://network/match_controller.gd, modes/<id>/rules.gd) and visuals in views, then check both one keyboard and online. Use only Summer multiplayer, never vanilla Godot networking. Do not hand-edit res://network/composition.tres, res://client/main.tscn or res://authority/main.tscn: the repo's tools/build_network.gd regenerates them. summer.build.json ships a placeholder gameId; online publishing needs the person's own game id from Summer Studio. Full notes (README, AGENTS.md, docs/modes.md, docs/multiplayer.md, docs/level-format.md, docs/slots.md) live in the template repo, not in this project. CUSTOMIZE BY: cast, levels, a mode, the look; keep the three-role game_run spine and the network files.",
+  "shipsProjectGodot": true,
+  "userFacing": {
+    "tagline": "A finished online party game for 2 to 10 friends: race, survive, carry something fragile, wear the crown.",
+    "highlights": [
+      "The Show: a race, a falling-floor survival and a climb to the crown",
+      "Glass carry and balloon co-op modes, plus four lobby minigames",
+      "Grab, throw and shove other players and props",
+      "Plays on one keyboard and online with Summer multiplayer",
+      "Levels are plain data files, modes are one folder each"
+    ]
+  }
+}
